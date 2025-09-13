@@ -8,7 +8,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
         body {
-            background-color: #0078D7;
+            background-color:  #0000AA; 
             color: white;
             font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             margin: 0;
@@ -23,7 +23,7 @@
         }
 
         .bsod-container {
-            max-width: 900px;
+            max-width: 1200px;
             width: 100%;
         }
 
@@ -40,10 +40,25 @@
             margin-bottom: 2rem;
         }
 
+        /* .percentage {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 4rem;
+        } */
+
         .percentage {
             font-size: 1.5rem;
             font-weight: 400;
             margin-bottom: 4rem;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.2s ease-in-out; /* Add a smooth transition effect */
+        }
+        
+        /* New CSS for hover effect */
+        .percentage:hover {
+            color: #FFFF55;
         }
 
         .info-section {
@@ -56,19 +71,17 @@
             width: 128px;
             height: 128px;
             background-color: white;
-            border-radius: 8px;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 8px;
+            padding: 2px;
         }
 
-        .qr-code-placeholder {
+        .qr-code img {
             width: 100%;
             height: 100%;
-            background-color: #0078D7;
-            border-radius: 4px;
         }
+
 
         .info-text {
             display: flex;
@@ -123,22 +136,24 @@
     <div class="bsod-container">
         <div class="sad-face">:(</div>
         <p class="main-message">
-            Your PC ran into a problem and needs to restart. We're just collecting .
+            Your PC ran into a problem and needs to restart. We're just checking your psychic resonances before proceding.
         </p>
-        <p class="percentage" id="percentage-text">
-            0% complete
+        <p>
+            <a href="bios.html" class="percentage" id="percentage-text">
+                0% complete
+            </a>
         </p>
 
         <div class="info-section">
             <div class="qr-code">
-                <div class="qr-code-placeholder"></div>
+               <img src="assets/svg/insta-qr-code.svg" alt="QR Code" onerror="this.style.display='none'">
             </div>
             <div class="info-text">
                 <p class="info-line">
                     For more information about this issue and possible fixes, visit https://www.google.com
                 </p>
                 <p class="info-line">
-                    If you call a support person, give them this info:
+                    If you call a support person, give them this info:<br>
                     Stop code: COMPUTER_SLOWLY_BECOMING_OBSOLETE
                 </p>
             </div>
@@ -159,7 +174,7 @@
             { value: 41, delay: 500 },
             { value: 40, delay: 500 },
             { value: 39, delay: 500 },
-             {value: 80, delay: 1000 },
+            {value: 80, delay: 1000 },
             { value: 81, delay: 500 },
             { value: 82, delay: 500 },
             { value: 83, delay: 500 },
@@ -182,7 +197,8 @@
                 setTimeout(updatePercentage, currentStep.delay);
             }
             if (stepIndex === progressSteps.length ) {
-                percentageText.textContent = `Continue to site...`;
+                percentageText.textContent = `Click to continue...`;
+                percentageText.style.color = '#FFFF55';
             }
         }
 
