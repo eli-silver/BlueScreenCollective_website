@@ -16,7 +16,6 @@
             margin: 0;
             overflow: hidden;
             font-size: 16px;
-            white-space: pre; /* Preserve whitespace for text formatting */
         }
 
         .bios-container {
@@ -32,14 +31,17 @@
 
         .header {
             text-align: center;
+            /* padding: none; */
             margin-bottom: 1rem;
-            line-height: 1.2;
+            line-height: 1.5;
         }
         
         .header .main-title {
+            padding: none;
             color: #FFFFFF;
         }
         .header .link {
+            padding: none;
             color: white;
             text-decoration: none;
         }
@@ -77,10 +79,18 @@
         }
         
         .right-panel {
-            flex: 1;
+            flex: 3;
             padding: 1rem;
             color: #FFFF55;
             line-height: 1.5;
+           
+        }
+
+        .text-content {
+            word-wrap: normal;
+            white-space: normal;
+            overflow-wrap: break-word;
+            min-width: 0;
         }
 
         .footer {
@@ -155,6 +165,8 @@
                 border-left: none;
                 padding-top: 1rem;
                 padding-left: 1rem;
+                overflow-wrap: break-word;
+                min-width: 0; 
             }
 
             .footer {
@@ -176,7 +188,6 @@
         <!-- Header -->
         <div class="header">
             <div class="main-title">BLUE SCREEN COLLECTIVE </div>
-            <div>CEM MAPPING UTILITY </div>
             <div ><a class="link" href="https://www.instagram.com/dikestreethacks/" target="_blank">[CLICK FOR PS852 KEY]</a></div>
         </div>
 
@@ -192,8 +203,8 @@
                 <div class="menu-item">LOAD PERFORMANCE DEFAULTS</div>
             </div>
             <div class="right-panel">
-                <p>This is a placeholder for the right-hand side text. You can add more information here about the selected menu item. For example, when "STANDARD CMOS SETUP" is highlighted, you could display details about system date, time, and drive configurations here.</p>
-                <p>Feel free to customize this text later to match each menu option.</p>
+                <div class="text-content"><p>This is a placeholder for the right-hand side text. You can add more information here about the selected menu item. For example, when "STANDARD CMOS SETUP" is highlighted, you could display details about system date, time, and drive configurations here.</p><p>Feel free to customize this text later to match each menu option.</p>
+                </div>
             </div>
         </div>
         
@@ -201,15 +212,13 @@
         <div class="footer">
             <div class="footer-left">
                 <div class="key-prompt">Esc : Quit</div>
-                <div class="key-prompt">F10 : Save & Exit Setup</div>
             </div>
             <div class="footer-right">
-                <div class="key-prompt">&uarr;&darr;&larr;&rarr; : Select Item</div>
-                <div class="key-prompt">(Shift) F2 : Change Color</div>
+                <div class="key-prompt">&uarr;&darr; : Select Item</div>
             </div>
         </div>
         <div class="time-date">
-            Time, Date, Hard Disk Type...
+            See you in Cyberspace...
         </div>
     </div>
 
