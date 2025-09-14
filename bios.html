@@ -83,7 +83,31 @@
             padding: 1rem;
             color: #FFFF55;
             line-height: 1.5;
-           
+            min-height: min-content;       
+            max-height: 100%;    
+        }
+
+        .right-panel p {
+            margin-bottom: 1rem;
+        }
+
+        .right-panel img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #AAAAAA;
+            margin-top: 1rem;
+            display: block;
+        }
+
+        .scrollable-content {
+            /* height: 100%; */
+            display:flex;
+            flex-direction: column;
+            overflow-y: scroll;
+            overscroll-behavior: contain ;
+            /* border for debugging box size: */
+            /* border:1px solid #AA0000; */
+            min-height: 0;
         }
 
         .text-content {
@@ -194,16 +218,17 @@
         <!-- Main Content -->
         <div class="content">
             <div class="menu-panel" id="menu-panel">
-                <div class="menu-item highlighted">STANDARD CMOS SETUP</div>
-                <div class="menu-item">BIOS FEATURES SETUP</div>
-                <div class="menu-item">CHIPSET FEATURES SETUP</div>
-                <div class="menu-item">POWER MANAGEMENT SETUP</div>
-                <div class="menu-item">PNP/PCI CONFIGURATION</div>
-                <div class="menu-item">LOAD BIOS DEFAULTS</div>
-                <div class="menu-item">LOAD PERFORMANCE DEFAULTS</div>
+                <div class="menu-item highlighted" data-info="standard">STANDARD CMOS SETUP</div>
+                <div class="menu-item" data-info="bios">BIOS FEATURES SETUP</div>
+                <div class="menu-item" data-info="chipset">CHIPSET FEATURES SETUP</div>
+                <div class="menu-item" data-info="power">POWER MANAGEMENT SETUP</div>
+                <div class="menu-item" data-info="pnp">PNP/PCI CONFIGURATION</div>
+                <div class="menu-item" data-info="load-bios">LOAD BIOS DEFAULTS</div>
+                <div class="menu-item" data-info="load-performance">LOAD PERFORMANCE DEFAULTS</div>
             </div>
             <div class="right-panel">
-                <div class="text-content"><p>This is a placeholder for the right-hand side text. You can add more information here about the selected menu item. For example, when "STANDARD CMOS SETUP" is highlighted, you could display details about system date, time, and drive configurations here.</p><p>Feel free to customize this text later to match each menu option.</p>
+                <div class="text-content scrollable-content" id="info-content">
+                    <!-- Dynamic content will be injected here -->
                 </div>
             </div>
         </div>
@@ -225,7 +250,88 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const menuItems = document.querySelectorAll('.menu-item');
+            const infoContent = document.getElementById('info-content');
             let currentIndex = 0;
+
+            // Rich content for each menu item, including HTML and images
+            const panelContent = {
+                'standard': `
+                    <h2>Standard CMOS Setup</h2>
+                    <p>This menu contains the basic system configuration settings. Here you can set the system date and time, and configure your primary drive settings. Make sure these settings are correct for your system to function properly.</p>
+                    <img src="https://placehold.co/400x200/5555FF/FFFFFF?text=CMOS+Diagram" alt="CMOS Diagram Placeholder">
+                    <p>It's crucial to set the date and time correctly as they are used by the operating system and many applications. The drive configuration settings should automatically detect your hard drives and optical drives. If a drive is not detected, you may need to manually configure it.</p>
+                `,
+                'bios': `
+                    <h2>BIOS Features Setup</h2>
+                    <p>The BIOS Features Setup menu allows you to configure advanced settings related to the BIOS, such as boot sequence and security. You can also enable or disable advanced CPU features here.</p>
+                    <p>Important options in this menu include:
+                    <ul>
+                        <li>Boot Sequence: Defines the order of devices the system will attempt to boot from.</li>
+                        <li>Virus Warning: Enables or disables a warning for boot sector viruses.</li>
+                        <li>CPU Cache: Allows you to enable or disable the L1 and L2 cache.</li>
+                    </ul>
+                    </p>
+                                      <p>The BIOS Features Setup menu allows you to configure advanced settings related to the BIOS, such as boot sequence and security. You can also enable or disable advanced CPU features here.</p>
+                    <p>Important options in this menu include:
+                    <ul>
+                        <li>Boot Sequence: Defines the order of devices the system will attempt to boot from.</li>
+                        <li>Virus Warning: Enables or disables a warning for boot sector viruses.</li>
+                        <li>CPU Cache: Allows you to enable or disable the L1 and L2 cache.</li>
+                    </ul>
+                    </p>
+                                      <p>The BIOS Features Setup menu allows you to configure advanced settings related to the BIOS, such as boot sequence and security. You can also enable or disable advanced CPU features here.</p>
+                    <p>Important options in this menu include:
+                    <ul>
+                        <li>Boot Sequence: Defines the order of devices the system will attempt to boot from.</li>
+                        <li>Virus Warning: Enables or disables a warning for boot sector viruses.</li>
+                        <li>CPU Cache: Allows you to enable or disable the L1 and L2 cache.</li>
+                    </ul>
+                    </p>
+                                      <p>The BIOS Features Setup menu allows you to configure advanced settings related to the BIOS, such as boot sequence and security. You can also enable or disable advanced CPU features here.</p>
+                    <p>Important options in this menu include:
+                    <ul>
+                        <li>Boot Sequence: Defines the order of devices the system will attempt to boot from.</li>
+                        <li>Virus Warning: Enables or disables a warning for boot sector viruses.</li>
+                        <li>CPU Cache: Allows you to enable or disable the L1 and L2 cache.</li>
+                    </ul>
+                    </p>
+                `,
+                'chipset': `
+                    <h2>Chipset Features Setup</h2>
+                    <p>Chipset Features Setup contains configuration settings for the system chipset and other core components. This includes settings for memory timing, AGP aperture size, and integrated peripherals.</p>
+                    <p>Changing these settings can significantly affect system performance. It is recommended to only modify these settings if you are an advanced user and know what you are doing, as incorrect values can lead to system instability.</p>
+                `,
+                'power': `
+                    <h2>Power Management Setup</h2>
+                    <p>Power Management Setup lets you configure power-saving features and wake-on-event settings. These settings can help reduce power consumption and extend the life of your components.</p>
+                    <p>Key features include:
+                    <ul>
+                        <li>Suspend Mode: Configures how the system enters a low-power state.</li>
+                        <li>Wake on LAN: Allows the system to be woken up from a sleep state by a network signal.</li>
+                    </ul>
+                    </p>
+                `,
+                'pnp': `
+                    <h2>PNP/PCI Configuration</h2>
+                    <p>PNP/PCI Configuration allows you to manage settings for Plug and Play devices and PCI slots. The system will typically auto-configure these settings, but you can manually override them if a device is not being detected correctly.</p>
+                    <p>You can allocate IRQs and DMAs for legacy devices here. This is a critical section for systems with older hardware that may not support Plug and Play functionality.</p>
+                `,
+                'load-bios': `
+                    <h2>Load BIOS Defaults</h2>
+                    <p>Selecting this option will reset all BIOS settings to their factory defaults. This is a useful troubleshooting step if you have configured a setting incorrectly and the system is unstable or fails to boot.</p>
+                    <p>Proceed with caution, as all of your custom settings will be lost. You will need to reconfigure any specific settings you had previously changed.</p>
+                `,
+                'load-performance': `
+                    <h2>Load Performance Defaults</h2>
+                    <p>This option will load optimized settings for system performance. These settings are pre-configured to provide a balance between stability and speed, and may slightly overclock certain components.</p>
+                    <p>While these settings are generally safe, they may not be suitable for all hardware configurations. If you experience any instability, you should revert to the BIOS defaults.</p>
+                `
+            };
+
+            function updatePanelContent(menuType) {
+                // Update the innerHTML of the right panel with the corresponding content
+                infoContent.innerHTML = panelContent[menuType] || '<p>Information not available.</p>';
+            }
 
             function updateHighlight(newIndex) {
                 // Remove highlight from current item
@@ -241,6 +347,10 @@
 
                 // Add highlight to the new item
                 menuItems[currentIndex].classList.add('highlighted');
+
+                // Get data-info of highlighted content to update dynamic content
+                const selectedMenuType = menuItems[currentIndex].getAttribute('data-info');
+                updatePanelContent(selectedMenuType);
             }
 
             document.addEventListener('keydown', (event) => {
@@ -250,6 +360,9 @@
                 } else if (event.key === 'ArrowDown') {
                     event.preventDefault(); // Prevent page scrolling
                     updateHighlight(currentIndex + 1);
+                }
+                else if (event.key === 'Escape') {
+                    // Optional: Implement quit functionality if needed
                 }
             });
 
