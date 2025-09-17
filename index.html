@@ -56,7 +56,6 @@
             transition: color 0.2s ease-in-out; /* Add a smooth transition effect */
         }
         
-        /* New CSS for hover effect */
         .percentage:hover {
             color: #FFFF55;
         }
@@ -161,58 +160,55 @@
     </div>
 
     <script>
-        // Get the percentage element by its ID
-        const percentageText = document.getElementById('percentage-text');
+    // Get the percentage element by its ID
+    const percentageText = document.getElementById('percentage-text');
 
-        // An array of percentage values and the time to wait before updating
-        const progressSteps = [
-            { value: 0, delay: 200 },
-            { value: 1, delay: 500 },
-            { value: 2, delay: 500 },
-            { value: 3, delay: 1000 },
-            { value: 42, delay: 1500 },
-            { value: 41, delay: 1000 },
-            { value: 40, delay: 800 },
-            { value: 39, delay: 500 },
-            {value: 80, delay: 1000 },
-            { value: 81, delay: 800 },
-            { value: 82, delay: 800 },
-            { value: 83, delay: 500 },
-            { value: 84, delay: 500 },
-            { value: 99, delay: 3000 },
-            { value: 100, delay: 1000 },
-            { value: 100, delay: 500 }
-        ];
+    // An array of percentage values and the time to wait before updating
+    const progressSteps = [
+        { value: 0, delay: 200 },
+        { value: 1, delay: 500 },
+        { value: 2, delay: 500 },
+        { value: 3, delay: 1000 },
+        { value: 42, delay: 1500 },
+        { value: 41, delay: 1000 },
+        { value: 40, delay: 800 },
+        { value: 39, delay: 500 },
+        { value: 80, delay: 1000 },
+        { value: 81, delay: 800 },
+        { value: 82, delay: 800 },
+        { value: 83, delay: 500 },
+        { value: 84, delay: 500 },
+        { value: 99, delay: 3000 },
+        { value: 100, delay: 1000 },
+        { value: 100, delay: 500 }
+    ];
 
-        let stepIndex = 0;
+    let stepIndex = 0;
 
-        // Function to update the percentage text with a delay
-        function updatePercentage() {
-            if (stepIndex < progressSteps.length) {
-                const currentStep = progressSteps[stepIndex];
-                percentageText.textContent = `${currentStep.value}% complete`;
-                stepIndex++;
-                
-                // Call the function again after the specified delay
-                setTimeout(updatePercentage, currentStep.delay);
-            }
-            if (stepIndex === progressSteps.length ) {
-                percentageText.textContent = `Rebooting...`;
-                percentageText.style.color = '#FFFF55';
-                stepIndex++;
-                setTimeout(updatePercentage, 3000);
-            }else if(stepIndex > progressSteps.length) {
-                stepIndex++;
-                window.location.href = "bios.html"; // Redirect to bios.html
-            }else{
-                percentageText.textContent = 'Click to continue...';
-                percentageText.style.color = '#EB18F3';
-            }
-
+    // Function to update the percentage text with a delay
+    function updatePercentage() {
+        if (stepIndex < progressSteps.length) {
+            const currentStep = progressSteps[stepIndex];
+            percentageText.textContent = `${currentStep.value}% complete`;
+            stepIndex++;
+            
+            // Call the function again after the specified delay
+            setTimeout(updatePercentage, currentStep.delay);
         }
+        else if (stepIndex === progressSteps.length) {
+            percentageText.textContent = `Rebooting... Click if redirect fails`;
+            percentageText.style.color = '#FFFF55';
+            setTimeout(() => {
+                window.location.href = "bios.html";
+            }, 3000);
+        }
+    }
 
-        // Start the animation when the page loads
-        window.onload = updatePercentage;
-    </script>
+    // Reset and start animation when page loads
+    window.addEventListener('load', function() {
+        stepIndex = 0;  // Reset the counter
+        updatePercentage();  // Start the animation
+    });
+</script>
 </body>
 </html>
