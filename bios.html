@@ -20,12 +20,13 @@
 
         .bios-container {
             width: 90%;
-            max-width: 1200px;
+            max-width: 1000px;
             height: 90%;
             padding: 1rem;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
+            border: 1px solid white;
         }
 
         .header {
@@ -37,6 +38,7 @@
         
         .header .main-title {
             padding: none;
+            padding-bottom: 0.5rem;
             color: #FFFFFF;
         }
         .header .link {
@@ -52,17 +54,17 @@
             flex-grow: 1;
             display: flex;
             height: 80%;
-            border-top: 2px solid white;
-            border-bottom: 2px solid white;
+            border-top: 2px solid #AAAAAA;
+            border-bottom: 2px solid #AAAAAA;
 
         }
         
         .menu-panel {
             flex: 1;
             padding: 1rem;
-            border-right: 2px solid white;
-            min-height: fit-content;
-            height: fit-content;
+            border-right: 2px solid #AAAAAA;
+            /* min-height: fit-content; */
+            /* height: fit-content; */
             display: flex;
             flex-direction: column;
             gap: 1rem;
@@ -119,6 +121,7 @@
         }
 
         .footer {
+            flex-grow: 1;
             padding-top: 1rem;
             display: flex;
             justify-content: space-between;
@@ -143,33 +146,66 @@
             color: #FFFFFF;
         }
 
-        .time-date {
+        .footer-center {
             text-align: center;
             width: 100%;
             margin-top: 1rem;
+            color: #AAAAAA;
+            font-size: 0.9rem;
         }
 
         /* --- Mobile-specific styles --- */
         @media (max-width: 768px) {
+
+            body{
+                padding-top : 1rem;
+                padding-bottom: 1rem;
+                min-height: 100vh;
+                align-items:stretch;
+                height: fit-content;
+                flex-shrink: 0;
+                overflow: auto;
+                overflow: scroll
+            }
+
+            .header{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 0;
+                padding: .5rem;
+
+            }
+
             .bios-container {
                 border: 1px;
                 width: 95%;
                 height: 95%;
+                min-height: 98vh;
                 border: 1px solid white;
+                /* overflow: hidden; */
             }
 
             .content {
+                /* display: block; */
                 flex-direction: column;
+                /* justify-content: space-around; */
                 border-top: none;
                 border-bottom: none;
             }
 
             .menu-panel {
+                /* display: flex; */
                 flex-direction: row;
                 justify-content: space-between;
                 border-right: none;
                 padding: 0.5rem;
                 overflow-x: auto;
+                overflow-x: scroll;
+                border-bottom: 1px solid white;
+                min-height: fit-content;
+                max-height: fit-content;
+                overflow-y:scroll;
                 gap: 0;
             }
 
@@ -177,6 +213,8 @@
                 flex-shrink: 0;
                 padding: 0.5rem 1rem;
                 margin: 0;
+                min-height: fit-content;
+                max-height: fit-content;
                 border-radius: 0;
             }
 
@@ -186,17 +224,18 @@
             }
             
             .right-panel {
-                border-top: 1px solid white;
+                /* border-top: 1px solid white; */
                 border-bottom: 1px solid white;
-                border-left: none;
-                padding-top: 1rem;
-                padding-bottom: 1rem;
+                /* border-left: none; */
+                /* padding-top: 1rem; */
+                /* padding-bottom: 1rem; */
+                display:block;
                 overflow-wrap: break-word;
-                min-width: 0;
+                /* min-width: 0; */
             }
 
             .footer {
-                margin-top: 0.5rem;
+                display:flex;
                 flex-direction: column;
                 align-items: center;
                 gap: 1rem;
@@ -206,6 +245,9 @@
                 text-align: center;
                 align-items: center;
             }
+
+
+
         }
         
     </style>
@@ -222,13 +264,12 @@
         <!-- Main Content -->
         <div class="content">
             <div class="menu-panel" id="menu-panel">
-                <div class="menu-item highlighted" data-info="standard">STANDARD CMOS SETUP</div>
-                <div class="menu-item" data-info="bios">BIOS FEATURES SETUP</div>
-                <div class="menu-item" data-info="chipset">CHIPSET FEATURES SETUP</div>
-                <div class="menu-item" data-info="power">POWER MANAGEMENT SETUP</div>
-                <div class="menu-item" data-info="pnp">PNP/PCI CONFIGURATION</div>
-                <div class="menu-item" data-info="load-bios">LOAD BIOS DEFAULTS</div>
-                <div class="menu-item" data-info="load-performance">LOAD PERFORMANCE DEFAULTS</div>
+                <div class="menu-item highlighted" data-info="setup">BIOS SETUP</div>
+                <div class="menu-item" data-info="power">REROUTE SYSTEM POWER</div>
+                <div class="menu-item" data-info="user">USER INPUT/OUTPUT</div>
+                <div class="menu-item" data-info="hardware">HARDWARE INFO</div>
+                <div class="menu-item" data-info="network">NETWORK CONFIGURATION</div>
+                <div class="menu-item" data-info="storage">DISK PROVISIONING</div>
             </div>
             <div class="right-panel">
                 <div class="text-content scrollable-content" id="info-content">
@@ -238,17 +279,19 @@
         </div>
         
         <!-- Footer -->
-        <div class="footer">
-            <div class="footer-left">
-                <div class="key-prompt">Esc : Quit</div>
+        <div class="footer-section">
+            <div class="footer">
+                <div class="footer-left">
+                    <div class="key-prompt">Esc : Quit</div>
+                </div>
+                <div class="footer-right">
+                    <div class="key-prompt">&uarr;&darr; : Select Item</div>
+                </div>
             </div>
-            <div class="footer-right">
-                <div class="key-prompt">&uarr;&darr; : Select Item</div>
+            <div class="footer-center">
+                See you in Cyberspace...
             </div>
-        </div>
-        <div class="time-date">
-            See you in Cyberspace...
-        </div>
+        </div> 
     </div>
 
     <script>
@@ -259,76 +302,103 @@
 
             // Rich content for each menu item, including HTML and images
             const panelContent = {
-                'standard': `
-                    <h2>Standard CMOS Setup</h2>
-                    <p>This menu contains the basic system configuration settings. Here you can set the system date and time, and configure your primary drive settings. Make sure these settings are correct for your system to function properly.</p>
-                    <img src="https://placehold.co/400x200/5555FF/FFFFFF?text=CMOS+Diagram" alt="CMOS Diagram Placeholder">
-                    <p>It's crucial to set the date and time correctly as they are used by the operating system and many applications. The drive configuration settings should automatically detect your hard drives and optical drives. If a drive is not detected, you may need to manually configure it.</p>
-                `,
-                'bios': `
-                    <h2>BIOS Features Setup</h2>
-                    <p>The BIOS Features Setup menu allows you to configure advanced settings related to the BIOS, such as boot sequence and security. You can also enable or disable advanced CPU features here.</p>
-                    <p>Important options in this menu include:
-                    <ul>
-                        <li>Boot Sequence: Defines the order of devices the system will attempt to boot from.</li>
-                        <li>Virus Warning: Enables or disables a warning for boot sector viruses.</li>
-                        <li>CPU Cache: Allows you to enable or disable the L1 and L2 cache.</li>
-                    </ul>
-                    </p>
-                                      <p>The BIOS Features Setup menu allows you to configure advanced settings related to the BIOS, such as boot sequence and security. You can also enable or disable advanced CPU features here.</p>
-                    <p>Important options in this menu include:
-                    <ul>
-                        <li>Boot Sequence: Defines the order of devices the system will attempt to boot from.</li>
-                        <li>Virus Warning: Enables or disables a warning for boot sector viruses.</li>
-                        <li>CPU Cache: Allows you to enable or disable the L1 and L2 cache.</li>
-                    </ul>
-                    </p>
-                                      <p>The BIOS Features Setup menu allows you to configure advanced settings related to the BIOS, such as boot sequence and security. You can also enable or disable advanced CPU features here.</p>
-                    <p>Important options in this menu include:
-                    <ul>
-                        <li>Boot Sequence: Defines the order of devices the system will attempt to boot from.</li>
-                        <li>Virus Warning: Enables or disables a warning for boot sector viruses.</li>
-                        <li>CPU Cache: Allows you to enable or disable the L1 and L2 cache.</li>
-                    </ul>
-                    </p>
-                                      <p>The BIOS Features Setup menu allows you to configure advanced settings related to the BIOS, such as boot sequence and security. You can also enable or disable advanced CPU features here.</p>
-                    <p>Important options in this menu include:
-                    <ul>
-                        <li>Boot Sequence: Defines the order of devices the system will attempt to boot from.</li>
-                        <li>Virus Warning: Enables or disables a warning for boot sector viruses.</li>
-                        <li>CPU Cache: Allows you to enable or disable the L1 and L2 cache.</li>
-                    </ul>
-                    </p>
-                `,
-                'chipset': `
-                    <h2>Chipset Features Setup</h2>
-                    <p>Chipset Features Setup contains configuration settings for the system chipset and other core components. This includes settings for memory timing, AGP aperture size, and integrated peripherals.</p>
-                    <p>Changing these settings can significantly affect system performance. It is recommended to only modify these settings if you are an advanced user and know what you are doing, as incorrect values can lead to system instability.</p>
+                'setup': `
+                    <h2>BLUE SCREEN COLLECTIVE</h2>
+                    <p>Blue Screen Collective is a group of Providence based artists, inventors, and hackers.</p>
+
+                    <img src="assets/images/DSH-4.jpg" alt="Description of image">
+
+                    <p>We pool our resources and knowledge to make our various creative projects a reality.</p>
+                    <p>The mission of BSC is to empower community members to create anything and everything they can imagine. This can take the form of traditional crafts, household repairs, DIY maker and digital fabrication, electronic circuits, and more. We believe that the act of creation with tools and sharing knowledge of the technology around us are fundamental to enacting social change in our community.</p>
+                    <img src="assets/images/DSH-25.jpg" alt="Description of image">
                 `,
                 'power': `
-                    <h2>Power Management Setup</h2>
-                    <p>Power Management Setup lets you configure power-saving features and wake-on-event settings. These settings can help reduce power consumption and extend the life of your components.</p>
-                    <p>Key features include:
+                    <h2>REROUTE SYSTEM POWER</h2>
+                    <p>Hacking is not only about anonymous cyber attackers stealing personal information–it is about repurposing tools and redefining the rules. It's a way of looking at what the things in our environment can do instead of accepting what they were designed to do.</p>
+
+                    <img src="assets/images/DSH-11.jpg" alt="Description of image">
+
+                    <p>Helpful crafts (life hacks) and turning toys into synthesizers, picking locks and fixing lamps, building sculptures and websites and robots; the hacking mentality can be applied to almost anything.</p>
+
+                    <img src="assets/images/DSH-8.jpg" alt="Description of image">
+                    <img src="assets/images/DSH-12.jpg" alt="Description of image">
+
+                `,
+                'user': `
+                    <h2>USER INPUT/OUTPUT</h2>
+
+                    <img src="assets/images/DSH-7.jpg" alt="Description of image">
+
+
+                    <p>Hacker night is our weekly open studio. Bring whatever you want to work on, especially if you want to teach others or learn more.</p>
+                    <img src="assets/images/DSH-21.jpg" alt="Description of image">
+                    <p>Hacker nights are defined by the people who show up. Sometimes community members come to share projects, get feedback, work on crafts and electronics, or use the available equipment. It's a time and space to create, or hack, with friends.</p>
+                    <img src="assets/images/DSH-15.jpg" alt="Description of image">
+
+
+
+                `,
+                'hardware': `
+                    <h2>HARDWARE INFO</h2>
+                    <p>Hackers are welcome to use tools and equipment with permission of the managers of the space and proper training. There are a variety of hand tools, power tools, digital fabrication equipment, and more available in the space.</p>
+
+                    <img src="assets/images/DSH-1.jpg" alt="Description of image">
+
+
+                    <p>Equipment highlights include:
                     <ul>
-                        <li>Suspend Mode: Configures how the system enters a low-power state.</li>
-                        <li>Wake on LAN: Allows the system to be woken up from a sleep state by a network signal.</li>
+                        <li>BambuLabs filament 3D printers (2)</li>
+                        <li>High resolution resin 3D printer</li>
+                        <li>Ceramic 3D printer</li>
+                        <li>Electric kiln for ceramics</li>
+                        <li>Desktop CNC milling machine</li>
+                        <li>24" Vinyl plotter</li>
+                        <li>Large format inkjet photo printer</li>
+                        <li>Framing tools</li>
+                        <li>Juki industrial sweing machine</li>
+                        <li>Drill press</li>
+                        <li>Glass edge grinder</li>
+                        <li>Hammer drill and impact driver</li>
+                        <li>Circular saw</li>
+                        <li>Jigsaw</li>
+                        <li>7x14" metal lathe</li>
+                        <li>Soldering stations</li>
+                        <li>Heat gun</li>
+                        <li>Regulated DC power supply</li>
+                        <li>8 channel oscilloscope</li>
+                        <li>Function generator</li>
+                        <li>Multimeters</li>
+                        <li>Hot glue guns</li>
+                        <li>Laser cutter (coming soon)</li>
+                        <li>And more...</li>
                     </ul>
                     </p>
+                    <img src="assets/images/DSH-2.jpg" alt="Description of image">
+                    <img src="assets/images/DSH-3.jpg" alt="Description of image">
+                    <img src="assets/images/DSH-18.jpg" alt="Description of image">
+                    <img src="assets/images/DSH-19.jpg" alt="Description of image">
+
                 `,
-                'pnp': `
-                    <h2>PNP/PCI Configuration</h2>
-                    <p>PNP/PCI Configuration allows you to manage settings for Plug and Play devices and PCI slots. The system will typically auto-configure these settings, but you can manually override them if a device is not being detected correctly.</p>
-                    <p>You can allocate IRQs and DMAs for legacy devices here. This is a critical section for systems with older hardware that may not support Plug and Play functionality.</p>
+                'network': `
+                    <h2>COME TO AN EVENT!</h2>
+                    <p>Weekly hacker nights are held every Wednesday evenings from 7-10pm. Contact @DikeStreetHacks on Instagram for the location and to RSVP</p>
+                    <img src="assets/images/DSH-20.jpg" alt="Description of image">
+                    <p>Special events are announced on instagram. Follow so you don't miss out!</p>
+                    <img src="assets/images/DSH-5.jpg" alt="Description of image">
+
                 `,
-                'load-bios': `
-                    <h2>Load BIOS Defaults</h2>
-                    <p>Selecting this option will reset all BIOS settings to their factory defaults. This is a useful troubleshooting step if you have configured a setting incorrectly and the system is unstable or fails to boot.</p>
-                    <p>Proceed with caution, as all of your custom settings will be lost. You will need to reconfigure any specific settings you had previously changed.</p>
-                `,
-                'load-performance': `
-                    <h2>Load Performance Defaults</h2>
-                    <p>This option will load optimized settings for system performance. These settings are pre-configured to provide a balance between stability and speed, and may slightly overclock certain components.</p>
-                    <p>While these settings are generally safe, they may not be suitable for all hardware configurations. If you experience any instability, you should revert to the BIOS defaults.</p>
+                'storage': `
+                    <h2>DSH DATA DUMP</h2>
+                    <img src="assets/images/DSH-9.jpg" alt="Description of image">
+                    <img src="assets/images/DSH-14.jpg" alt="Description of image">
+                    <img src="assets/images/DSH-22.jpg" alt="Description of image">
+                    <img src="assets/images/DSH-10.jpg" alt="Description of image">
+                    <img src="assets/images/DSH-17.jpg" alt="Description of image">
+                    <img src="assets/images/DSH-23.jpg" alt="Description of image">
+                    <img src="assets/images/DSH-16.jpg" alt="Description of image">
+
+
+                   
                 `
             };
 
