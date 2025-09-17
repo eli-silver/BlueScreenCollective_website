@@ -130,6 +130,11 @@
             }
         }
     </style>
+
+    <!-- Preload QR code image -->
+    <link rel="preload" href="assets/svg/insta-qr-code.svg" as="image">
+
+
 </head>
 <body>
     <div class="bsod-container">
@@ -204,8 +209,47 @@
         }
     }
 
+
+    // Preload images during animation
+    function preloadImages() {
+        const imagesToPreload = [
+            'assets/images/DSH-1.jpg',
+            'assets/images/DSH-2.jpg',
+            'assets/images/DSH-3.jpg',
+            'assets/images/DSH-4.jpg',
+            'assets/images/DSH-5.jpg',
+            'assets/images/DSH-6.jpg',
+            'assets/images/DSH-7.jpg',
+            'assets/images/DSH-8.jpg',
+            'assets/images/DSH-9.jpg',
+            'assets/images/DSH-10.jpg',
+            'assets/images/DSH-11.jpg',
+            'assets/images/DSH-12.jpg',
+            'assets/images/DSH-13.jpg',
+            'assets/images/DSH-14.jpg',
+            'assets/images/DSH-15.jpg',
+            'assets/images/DSH-16.jpg',
+            'assets/images/DSH-17.jpg',
+            'assets/images/DSH-18.jpg',
+            'assets/images/DSH-19.jpg',
+            'assets/images/DSH-20.jpg',
+            'assets/images/DSH-21.jpg',
+            'assets/images/DSH-22.jpg',
+            'assets/images/DSH-23.jpg',
+            'assets/images/DSH-24.jpg',
+            'assets/images/DSH-25.jpg',
+        ];
+        
+        imagesToPreload.forEach(src => {
+            const img = new Image();
+            img.src = src;
+            // Images are now cached
+        });
+    }
+
     // Reset and start animation when page loads
     window.addEventListener('load', function() {
+        preloadImages();
         stepIndex = 0;  // Reset the counter
         updatePercentage();  // Start the animation
     });
